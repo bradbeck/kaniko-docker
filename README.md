@@ -3,19 +3,30 @@
 ## Example
 
 ```bash
-./run_in_docker.sh /docker/Dockerfile "$(pwd)"/context ttl.sh/"$USER"/kaniko-docker
-```
+$ cue cmd build
+...
 
-## Verifying
+# Inputs
 
-```bash
-$ crane digest ttl.sh/"$USER"/kaniko-docker:latest
-sha256:f25697cb9efb03943ca55efcb2a75c1b3a17f0db4a5359517728fc7b866b98fb
-$ cat context/digest-file
-sha256:f25697cb9efb03943ca55efcb2a75c1b3a17f0db4a5359517728fc7b866b98fb
+buildImageUrl: gcr.io/kaniko-project/executor
+buildImageTag: latest
+dockerFile   : /docker/Dockerfile
+digestFile   : digest-file
+context      : /.../kaniko-docker/context
+destination  : ttl.sh/.../kaniko-docker:10m
+
+# Results
+
+digests
+    local   : sha256:aaa...
+    registry: sha256:aaa...
+
 ```
 
 ## References
 
 * <https://github.com/GoogleContainerTools/kaniko#running-kaniko>
 * <https://github.com/GoogleContainerTools/kaniko/blob/main/run_in_docker.sh>
+* <https://cuelang.org>
+* <https://blog.patapon.info/cue-tool/>
+* <https://pkg.go.dev/cuelang.org/go/pkg/tool/exec>
